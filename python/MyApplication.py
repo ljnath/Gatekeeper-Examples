@@ -11,11 +11,9 @@ class Hardware:
         """
         Static method to generate unique hardware ID based on hardware MAC addresss
         """
-        mac = uuid.UUID(int=uuid.getnode()).hex[-12:]
-        mac_address = ":".join([mac[e:e + 2] for e in range(0, 11, 2)])
+        mac_address = uuid.UUID(int=uuid.getnode()).hex[-12:]
         key = sha256(mac_address.encode('utf-8')).hexdigest()
-        unique_key = '-'.join([key[:8], key[8:16], key[16:24], key[24:]])
-        return unique_key
+        return key.upper()
     
 
 class MyApplication:
