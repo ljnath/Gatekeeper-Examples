@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.33328.57
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GatekeeperTestApp", "GatekeeperTestApp\GatekeeperTestApp.csproj", "{5E56B78B-CB0E-419A-BA61-CF87B82B5DDD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5E56B78B-CB0E-419A-BA61-CF87B82B5DDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E56B78B-CB0E-419A-BA61-CF87B82B5DDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E56B78B-CB0E-419A-BA61-CF87B82B5DDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E56B78B-CB0E-419A-BA61-CF87B82B5DDD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CB57D023-5649-4596-81E7-0A1553176638}
+	EndGlobalSection
+EndGlobal
