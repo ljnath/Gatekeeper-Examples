@@ -12,38 +12,47 @@ namespace GatekeeperTestApp
     {
         static void Main(string[] args)
         {
+            // gatekeeper license check URL
+            string gatekeeperCheckLicenseUrl = "https://app.ljnath.com/gatekeeper/v3/licenses/license";
+
+            // name and details of this console application
             string applicationName = "GatekeeperTestApp";
             string applicationVersion = "1.0.1";
             string applicationId = "CSHARP_7599d4dd0bdd4c0db81c58ef4974df3a";
-            string clientId = Hardware.GetId();
 
-            string apiKey = "your-gatekeeper-api-key";
+            // node id where this application is running
+            string nodeId = Hardware.GetId();
 
+            string appToken = "app-token-created-for-this-application";
+
+            Console.WriteLine($"Starting {applicationName} v{applicationVersion}");
             while (true)
             {
-                Console.WriteLine("\nChecking license in 3 seconds...");
+                Console.WriteLine("\nWaiting for 3 seconds before checking for license using Gatekeeper...");
                 Thread.Sleep(3000);
-
-                using (HttpClient client = new HttpClient())
+                using (HttpClient httpClient = new HttpClient())
                 {
+                    // add authentication header to the http client
+                    httpClient.DefaultRequestHeaders.Add("x-app-token", appToken);
 
-                    var requestUri = "https://app.ljnath.com/gatekeeper/v3/licenses/license";
-                    var requestBody = new
+                    // create the license check request payload
+                    object requestPayload = new
                     {
                         application_id = applicationId,
                         application_name = applicationName,
                         application_version = applicationVersion,
-                        client_id = clientId
+                        node_id = nodeId
                     };
 
-                    string jsonBody = JsonConvert.SerializeObject(requestBody);
-                    StringContent content = new StringContent(jsonBody, Encoding.UTF8, "application/json");
-                    client.DefaultRequestHeaders.Add("x-api-key", apiKey);
+                    string jsonPayload = JsonConvert.SerializeObject(requestPayload);
+                    StringContent content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
 
-                    HttpResponseMessage response = client.PostAsync(requestUri, content).Result;
-                    string responseContent = response.Content.ReadAsStringAsync().Result;
 
-                    Console.WriteLine("License response is :" + responseContent);
+                    // make POST call and get the response from the server
+                    HttpResponseMessage httpResponseMessage = httpClient.PostAsync(gatekeeperCheckLicenseUrl, content).Result;
+                    string responseContent = httpResponseMessage.Content.ReadAsStringAsync().Result;
+
+                    Console.WriteLine("License response is: " + responseContent);
                 }
             }
         }
